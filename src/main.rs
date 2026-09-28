@@ -1,0 +1,2 @@
+use std::{env,fs};
+fn main(){let p=env::args().nth(1).unwrap_or_else(||".".into());let m=fs::metadata(&p).expect("path not found");if m.is_file(){let s=fs::read_to_string(&p).unwrap_or_default();println!("FILE: {} lines={} words={} chars={}",p,s.lines().count(),s.split_whitespace().count(),s.chars().count());}else{let mut files=0;for e in fs::read_dir(&p).unwrap(){if e.is_ok(){files+=1;}}println!("DIRECTORY: {} entries={}",p,files);}}
